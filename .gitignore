@@ -7,3 +7,6 @@
 // Folders
 dist
 node_modules
+
+// Config files
+configs/dev.json
