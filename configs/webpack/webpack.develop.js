@@ -1,13 +1,17 @@
-const config = require('../helpers/get-develop-config')();
+const getDevelopPort = require('../helpers/get-develop-port');
+const getDevelopHost = require('../helpers/get-develop-host');
+const getDevelopEntry = require('../helpers/get-develop-entry');
 
-// Collect dev server port from differnts variants of configurations
-const ENV_PORT = process.env.PORT;
-const CONFIG_PORT = config ? config.PORT : null;
-const DEFAULT_PORT = 9000;
+getDevelopEntry();
 
 module.exports = {
+  mode: 'development',
+
+  entry: getDevelopEntry(),
+
   devServer: {
     hot: true,
-    port: ENV_PORT || CONFIG_PORT || DEFAULT_PORT,
+    host: getDevelopHost(), 
+    port: getDevelopPort(), 
   },
 };
