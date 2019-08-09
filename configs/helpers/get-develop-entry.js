@@ -1,17 +1,22 @@
 const root = require('./root.js');
+const packageConfig = require(root(['package.json']));
 
 const getDevelopEntry = (appEntryFile = '') => {
   const entry = [];
 
   // If building React application
-  if(require.resolve('react')) {
-    entry.push('react-host-loader/path');
+  if(
+    packageConfig
+    && packageConfig.dependencies
+    && packageConfig.dependencies['react-hot-loader']
+  ) {
+    entry.push('react-hot-loader/patch');
   }
 
   entry.push(
     appEntryFile
       ? appEntryFile
-      : root(['src', 'index.jsx']),
+      : root(['src', 'index']),
   );
 
   return entry;
