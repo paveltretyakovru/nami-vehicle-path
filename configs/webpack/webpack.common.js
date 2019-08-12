@@ -21,6 +21,7 @@ module.exports = {
 
   resolve: {
     alias: {
+      app: root(['src', 'app']),
       assets: root(['src', 'assets']),
     }
   },
