@@ -1,4 +1,5 @@
 const root = require('../helpers/root');
+const DefinePlugin = require('webpack').DefinePlugin;
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -36,6 +37,9 @@ module.exports = {
       favicon: 'src/favicon.ico',
       filename: 'index.html',
       template: root(['src', 'index.html']),
+    }),
+    new DefinePlugin({
+      __DEVELOP__: JSON.stringify(process.env.NODE_ENV === 'develop'),
     }),
   ],
 };
