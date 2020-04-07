@@ -1,0 +1,19 @@
+.app {
+  &__map {
+    width: 100%;
+    height: 600px;
+    min-width: 375px;
+  }
+
+  &__map-controller {
+    padding: 13px;
+  }
+}
+
+.paths-controller {
+  margin: 13px 0;
+
+  &__block {
+    margin: 30px 0;
+  }
+}

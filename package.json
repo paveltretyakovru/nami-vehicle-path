@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=develop node node_modules/.bin/webpack-dev-server",
-    "build": "NODE_ENV=production node node_modules/.bin/webpack"
+    "build": "NODE_ENV=production node node_modules/.bin/webpack",
+    "start:windows": "webpack-dev-server"
   },
   "repository": "git@bitbucket.org:ptretyakov/react-bag.git",
   "author": "Pavel Tretyakov <tretyakovpavel.ru@gmail.com>",
@@ -15,6 +16,7 @@
     "eslint": "^6.1.0",
     "eslint-plugin-react": "^7.14.3",
     "file-loader": "^4.1.0",
+    "html-loader": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "node-sass": "^4.12.0",
@@ -25,5 +27,13 @@
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "install": "^0.13.0",
+    "jquery": "^3.4.1",
+    "leaflet": "^1.6.0",
+    "leaflet-hotline": "^0.4.0",
+    "npm": "^6.14.4",
+    "spectrum-colorpicker2": "^2.0.0"
   }
 }

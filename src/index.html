@@ -1,15 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html class="text-large">
   <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="favicon.ico">
-    <title>Bag Application</title>
+    <title>Vehicle Location Paths - demo</title>
   </head>
 
-  <body>
-    <div id="root">
-      <p>Welcome to the Bag Application</p>
-      <div id="bag-image__wrapper"></div>
+  <body class="grid__content">
+    <header class="grid__line">
+      <div class="grid__row-12 header__logo-wrapper">
+        <div class="logo"></div>
+
+        <div class="header__logo-title title">Vehicle Paths Demo</div>
+      </div>
+    </header>
+
+    <div class="app grid__line grid__margin-top">
+      <div class="grid__row-6">
+        <div class="app__map card card-1"></div>
+      </div>
+
+      <div class="grid__row-6">
+        <div class="app__map-controller card card-1">
+          <span class="title">Точки маршрута</span>
+
+          <div class="paths-controller">
+            <label class="pure-material-checkbox">
+              <input type="checkbox" id="display-dots-input" checked />
+              <span>Отображать точки на карте</span>
+            </label>
+
+            <br />
+
+            <label class="ui-checkbox">
+              <input id="dot-color-picker" />
+              <span>Цвет заливки</span>
+            </label>
+
+            <br />
+
+            <label class="ui-checkbox">
+              <input id="dot-stroke-color-picker" />
+              <span>Цвет обводки</span>
+            </label>
+
+            <div
+              id="dot-fill-opacity-slider"
+              label="Непрозрачность заливки"
+              min="1"
+              max="100"
+              class="paths-controller__block"
+            ></div>
+
+            <div
+              id="dot-opacity-slider"
+              label="Непрозрачность обводки"
+              min="1"
+              max="100"
+              class="paths-controller__block"
+            ></div>
+
+            <div
+              id="dot-radius-slider"
+              label="Радиус точки"
+              min="0"
+              max="10"
+              class="paths-controller__block"
+            ></div>
+
+            <div
+              id="dot-weight-slider"
+              label="Толщина обводки"
+              class="paths-controller__block"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid__row-6">
+        <div class="app__map-controller card card-1">
+          <span class="title">Кривая маршрута</span>
+
+          <br /><br />
+
+          <label class="ui-checkbox">
+            <input id="path-max-color-picker" />
+            <span>Цвет максимального значения</span>
+          </label>
+
+          <br /><br />
+
+          <label class="ui-checkbox">
+            <input id="path-mean-color-picker" />
+            <span>Цвет среднего значения</span>
+          </label>
+
+          <br /><br />
+
+          <label class="ui-checkbox">
+            <input id="path-min-color-picker" />
+            <span>Цвет минимального значения</span>
+          </label>
+        </div>
+
+        <div class="app__map-controller card card-1">
+          <span class="title">Фильтр значений</span>
+
+          <div
+            id="dots-heading-filter-slider"
+            label="Отображать значения с поворотом"
+            class="paths-controller__block"
+          ></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

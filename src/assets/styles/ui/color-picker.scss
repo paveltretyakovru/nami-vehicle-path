@@ -1,0 +1,18 @@
+$pure-material-primary-rgb: rgb(139,195,74);
+$pure-material-onprimary-rgb: rgb(255, 255, 255);
+$pure-material-surface-rgb: rgb(255, 255, 255);
+$pure-material-onsurface-rgb: rgb(0, 0, 0);
+
+.ui-checkbox {
+  input {
+    width: 22px;
+    border: 0px;
+    padding: 0;
+  }
+
+  span {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 8px;
+  }
+}

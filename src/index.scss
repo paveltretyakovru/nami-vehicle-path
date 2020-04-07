@@ -1,7 +1,44 @@
 @import "assets/styles/reset.scss";
+@import "./assets/styles/grid.scss";
 @import "assets/styles/font.scss";
+@import "./assets/styles/typography.scss";
+@import "../node_modules/leaflet/dist/leaflet.css";
+@import "/node_modules/spectrum-colorpicker2/dist/spectrum.min.css";
+@import "./assets/styles/ui/ui.scss";
 
 body {
   font-family: 'Roboto', sans-serif;
 }
 
+header {
+  height: 40px;
+  padding: 13px;
+  background-color: #8bc34a;
+
+  box-shadow:
+    0 3px 5px -1px rgba(0,0,0,.2),
+    0 6px 10px 0 rgba(0,0,0,.14),
+    0 1px 18px 0 rgba(0,0,0,.12);
+
+  .logo {
+    height: inherit;
+
+    img {
+      height: inherit;
+    }
+  }
+
+  .header {
+    &__logo {
+      &-wrapper {
+        height: 100%;
+        display: flex;
+      }
+
+      &-title {
+        color: #fff;
+        padding-left: 13px;
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // Module rules
 const scss_rule = require('./rules/scss.rule');
 const font_rule = require('./rules/font.rule');
+const html_rule = require('./rules/html.rule');
 const image_rule = require('./rules/image.rule');
 
 module.exports = {
@@ -21,6 +22,7 @@ module.exports = {
       scss_rule,
       image_rule,
       font_rule,
+      html_rule,
     ],
   },
 
