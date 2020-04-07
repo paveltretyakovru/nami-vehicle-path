@@ -18,5 +18,6 @@ export const PATH_MEAN_COLOR_INPUT_SELECTOR = 'path-mean-color-picker';
 export const DEFAULT_DOT_COLOR = '#FFF';
 export const DEFAULT_DOT_STROKE_COLOR = '#000';
 // Selectors
-export const DOTS_HEADING_FILTER_SLIDER_SELECTOR = '#dots-heading-filter-slider';
+export const DOTS_MIN_HEADING_FILTER_SLIDER_SELECTOR = '#dots-min-heading-filter-slider';
+export const DOTS_MAX_HEADING_FILTER_SLIDER_SELECTOR = '#dots-max-heading-filter-slider';
 // <====================================================== Dots config constants

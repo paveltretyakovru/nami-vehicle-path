@@ -11,14 +11,19 @@ import {
 
 // Initialize some constants
 const longCoordinates = coordinates.long.map((coordinant) => {
+  // Generate Z - coordinate
   coordinant.push(Math.random());
+
+  // Generate heading parameter
+  coordinant.push(Math.floor(Math.random() * 360));
 
   return {
     lat: coordinant[0],
     lng: coordinant[1],
     z: coordinant[2],
+    heading: coordinant[3],
   }
-}).filter(() => Math.random() > 0.5);
+}).filter(() => Math.random() > 0.8);
 
 const tileServer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
@@ -69,7 +74,9 @@ export class Map {
     try {
       const layer = this.layers.get(DOTS_LAYER_NAME);
 
-      layer.show(this.map);
+      if (layer && layer.show) {
+        layer.show(this.map);
+      }
     } catch (error) {
       console.error('Map#hideDots()', { error });
     }
@@ -78,7 +85,10 @@ export class Map {
   hideDots() {
     try {
       const layer = this.layers.get(DOTS_LAYER_NAME);
-      layer.hide();
+      
+      if (layer && layer.hide) {
+        layer.hide();
+      }
     } catch (error) {
       console.error('Map#hideDots()', { error });
     }

@@ -35,14 +35,16 @@ export class Dot {
 
   constructor(options) {
     try {
-      const { lat, lng, z } = options;
+      const { lat, lng, z, heading, map } = options;
 
       this.z = z;
       this.lat = lat;
       this.lng = lng;
+      this.map = map;
       this.layer = this._createLeafletLayer();
-      this.strokeColor = DEFAULT_DOT_STROKE_COLOR;
+      this.heading = heading;
       this.fillColor = DEFAULT_DOT_COLOR;
+      this.strokeColor = DEFAULT_DOT_STROKE_COLOR;
 
       this._createPopup();
     } catch (error) {
@@ -50,10 +52,22 @@ export class Dot {
     }
   }
 
+  hide() {
+    this.layer.remove();
+  }
+
+  show() {
+    this.layer.addTo(this.map);
+  }
+
   _createPopup() {
     try {
       if (!this.layer) throw new Error('this.layer is not defined'); 
-      this.layer.bindPopup("<b>Hello world!</b><br>I am a popup.");
+      this.layer.bindPopup(`
+        <div class="dot__popup">
+          Heading: ${this.heading}
+        </div>
+      `);
 
       this.layer.on('mouseover', function (e) {
         this.openPopup();
@@ -71,11 +85,11 @@ export class Dot {
       return L.circle(
         [ this.lat, this.lng ],
         {
-          fillColor: this.fillColor,
           color: this.strokeColor,
           radius: 1.5,
           weight: 1,
           opacity: 28,
+          fillColor: this.fillColor,
           fillOpacity: 1,
           // stroke: false,
         });

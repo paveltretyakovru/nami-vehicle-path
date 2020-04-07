@@ -6,10 +6,28 @@ export class Dots {
     try {
       this.map = map;
       this.collection = [];
-      coordinates.forEach(coord => this.collection.push(new Dot(coord)));
+      coordinates.forEach((coord) => {
+        this.collection.push(new Dot({
+          ...coord,
+          map,
+        }));
+      });
     } catch (error) {
       console.error('Dots#constructor()', { error });
     }
+  }
+
+  filterDotsByHeading(heading, less = true) {
+    this.collection.forEach((dot) => {
+      if (
+        ((less && dot.heading > heading))
+        || (!less && (dot.heading < heading))
+      ) {
+        dot.show();
+      }  else {
+        dot.hide();
+      }
+    });
   }
 
   getDotLayers() {
