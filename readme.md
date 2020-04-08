@@ -1,5 +1,6 @@
-# Bag construction application
-Application to quick extract different javascript applications (by Pavel Tretyakov)
+# Vehicle Paths Demo construction application
+Application demonstrate event detail vehicle location dot and pathes
+(by Pavel Tretyakov)
 
 ## Install
 To init project you can use npm or yarn, by the next instructions will use yarn
