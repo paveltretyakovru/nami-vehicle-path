@@ -24,6 +24,7 @@ const filtersList = [
   {
     name: 'heading-min',
     type: 'slider',
+    value : null,
     selector: DOTS_MIN_HEADING_FILTER_SLIDER_SELECTOR,
 
     constructor() {
@@ -32,13 +33,17 @@ const filtersList = [
 
     onChange(value) {
       console.log('onChange', value);
+      this.value = value;
       window.global.dots.filterDotsByHeading(value);
+      window.global.app.rootScope.configurationValues.minHeading = value;
+      window.global.app.updateConfigDisplay();
     }
   },
 
   {
     name: 'heading-max',
     type: 'slider',
+    value : null,
     selector: DOTS_MAX_HEADING_FILTER_SLIDER_SELECTOR,
 
     constructor() {
@@ -46,8 +51,10 @@ const filtersList = [
     },
 
     onChange(value) {
-      console.log('onChange', value);
+      this.value = value;
       window.global.dots.filterDotsByHeading(value, false);
+      window.global.app.rootScope.configurationValues.maxHeading = value;
+      window.global.app.updateConfigDisplay();
     }
   },
 ];

@@ -23,14 +23,23 @@ export class Dot {
   }
 
   set fillColor(color = DEFAULT_DOT_COLOR) {
-    this.layer.setStyle({ fillColor: color, radius: 30 });
+    this.layer.setStyle({ fillColor: color });
     return color;
   }
-
 
   set strokeColor(color = DEFAULT_DOT_STROKE_COLOR) {
     this.layer.setStyle({ color });
     return color;
+  }
+
+  updateStyle({
+    weight, opacity, fillOpacity, fillColor, strokeColor, radius
+  }) {
+    this.layer.setStyle({
+      weight, opacity, fillOpacity, fillColor, strokeColor
+    });
+
+    this.layer.setRadius(radius);
   }
 
   constructor(options) {
@@ -82,15 +91,17 @@ export class Dot {
 
   _createLeafletLayer() {
     try {
+      const config = window.global.app.rootScope.configurationValues;
+
       return L.circle(
         [ this.lat, this.lng ],
         {
-          color: this.strokeColor,
-          radius: 1.5,
-          weight: 1,
-          opacity: 28,
-          fillColor: this.fillColor,
-          fillOpacity: 1,
+          color: config.strokeColor,
+          radius: config.dotRadius,
+          weight: config.strokeWeight,
+          opacity: config.strokeOpacity / 100,
+          fillColor: config.fillColor,
+          fillOpacity: config.fillOpacity / 100,
           // stroke: false,
         });
     } catch (error) {

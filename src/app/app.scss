@@ -17,3 +17,40 @@
     margin: 30px 0;
   }
 }
+
+.use-config {
+  height: 100%;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__button {
+    width: 200px;
+  }
+}
+
+.result-config {
+  height: 100%;
+  display: flex;
+  padding: 13px;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__code {
+    margin-bottom: auto;
+  }
+
+  &__button {
+    width: 200px;
+    margin-top: 6px;
+  }
+}
+
+.dot-filters {
+  height: 100%;
+}
+
+.dot-configuration {
+  height: 100%;
+}

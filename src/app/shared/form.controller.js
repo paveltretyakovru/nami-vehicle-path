@@ -11,6 +11,12 @@ export class FormController {
     changedDotFillOpacity, pathMaxColorChanged, pathMinColorChanged,
     pathMeanColorChanged, mapController,
   }) {
+    const { app } = window.global;
+    this.rootScope = app.rootScope;
+    this.configurationValues = this.rootScope.configurationValues;
+
+    this.sliders = [];
+    this.spectrums = [];
     this.mapController = mapController;
 
     // Инициализация фукнций событий
@@ -75,87 +81,135 @@ export class FormController {
     }
   }
 
+  switchColorPickers(configs = {}) {
+    this.spectrums.forEach((spectrum) => {
+      if (configs[spectrum.name]) {
+        $(spectrum.selector).spectrum('set', configs[spectrum.name]);
+      }
+    });
+  }
+
+  switchSliders(configs = {}) {
+    this.sliders.forEach((slider) => {
+      if (configs[slider.name]) {
+        slider.changeValue(configs[slider.name]);
+      }
+    });
+  }
+
   // ====================== PATH CONFIG INITIALIZERS ===========================
   _initPathMaxColor() {
-    $(this.$pathMaxColor).spectrum({
-      type: "color",
-      color: PATH_MAX_COLOR,
-      preferredFormat: 'hex',
+    const { configurationValues, $pathMaxColor } = this;
 
-      change: color => this.onChangePathMaxColor(color.toHexString())
+    this.spectrums.push({
+      name: 'maxColor',
+      selector: $pathMaxColor,
+      constructor: $($pathMaxColor).spectrum({
+        type: "color",
+        color: configurationValues.maxColor,
+        preferredFormat: 'hex',
+  
+        change: color => this.onChangePathMaxColor(color.toHexString())
+      }),
     });
   }
 
   _initPathMinColor() {
-    $(this.$pathMinColor).spectrum({
-      type: "color",
-      color: PATH_MIN_COLOR,
-      preferredFormat: 'hex',
+    const { configurationValues, $pathMinColor } = this;
 
-      change: color => this.onChangePathMinColor(color.toHexString())
+    this.spectrums.push({
+      name: 'minColor',
+      selector: $pathMinColor,
+      constructor: $(this.$pathMinColor).spectrum({
+        type: "color",
+        color: configurationValues.minColor,
+        preferredFormat: 'hex',
+  
+        change: color => this.onChangePathMinColor(color.toHexString())
+      }),
     });
   }
 
   _initPathMeanColor() {
-    $(this.$pathMeanColor).spectrum({
-      type: "color",
-      color: PATH_MEAN_COLOR,
-      preferredFormat: 'hex',
+    const { configurationValues, $pathMeanColor } = this;
 
-      change: color => this.onChangePathMeanColor(color.toHexString())
+    this.spectrums.push({
+      name: 'normalColor',
+      selector: $pathMeanColor,
+      constructor: $($pathMeanColor).spectrum({
+        type: "color",
+        color: configurationValues.normalColor,
+        preferredFormat: 'hex',
+  
+        change: color => this.onChangePathMeanColor(color.toHexString())
+      }),
     });
   }
 
   // ====================== DOT INITALIZERS ====================================
   _initDotRadiusSlider() {
-    new SliderComponent({
+    const { configurationValues } = this;
+
+    this.sliders.push(new SliderComponent({
       el: this.$dotRadiusSlider,
+      name: 'dotRadius',
       data: {},
-      value: 2,
+      value: configurationValues.dotRadius,
       changed: this.onChangeDotRadius.bind(this.mapController),
-    });
+    }));
   }
 
   _initChangeDotStrokeWeight() {
+    const { configurationValues } = this;
+
     try {
-      new SliderComponent({
+      this.sliders.push(new SliderComponent({
         el: this.$dotStrokeWeightSlider,
-        value: 2,
+        name: 'strokeWeight',
+        value: configurationValues.strokeWeight,
         changed: this.onChangeDotStrokeWeight.bind(this.mapController)
-      });
+      }));
     } catch (error) {
       console.error('FormController#_initDisplayDotsStroke()', error);
     }
   }
 
   _initDotFillOpacitySlider() {
-    new SliderComponent({
+    const { configurationValues } = this;
+
+    this.sliders.push(new SliderComponent({
       el: this.$dotFillOpacitySlider,
       data: {},
-      value: 28,
+      name: 'fillOpacity',
+      value: configurationValues.fillOpacity,
 
       changed: (value) => {
         this.onChangeDotFillOpacity(value)
       }
-    });
+    }));
   }
 
   _initDotOpacitySlider() {
-    new SliderComponent({
+    const { configurationValues } = this;
+    
+    this.sliders.push(new SliderComponent({
       el: this.$dotOpacitySlider,
       data: {},
-      value: 28,
+      name: 'strokeOpacity',
+      value: configurationValues.strokeOpacity,
 
       changed: (value) => {
         this.onChangeDotOpacity(value)
       }
-    });
+    }));
   }
 
   _initDotsStrokeColorEventsListeners() {
+    const { configurationValues } = this;
+
     $(this.$dotStrokeColorPicker).spectrum({
       type: "color",
-      color:  DEFAULT_DOT_STROKE_COLOR,
+      color:  configurationValues.strokeColor,
       preferredFormat: 'hex',
 
       change: color => this.onChangeDotStrokeColor(color.toHexString())
@@ -163,9 +217,11 @@ export class FormController {
   }
 
   _initDotsColorEventsListeners() {
+    const { configurationValues } = this;
+
     $(this.$dotColorPicker).spectrum({
       type: "color",
-      color:  DEFAULT_DOT_COLOR,
+      color:  configurationValues.fillColor,
       preferredFormat: 'hex',
 
       change: color => this.onChangeDotColor(color.toHexString())

@@ -17,6 +17,15 @@ export class Dots {
     }
   }
 
+  updateDotsStyles(styleConfig) {
+    this.collection.forEach(dot => dot.updateStyle({
+      ...styleConfig,
+      weight: styleConfig.strokeWeight,
+      opacity: styleConfig.strokeOpacity,
+      radius: styleConfig.dotRadius,
+    }));
+  }
+
   filterDotsByHeading(heading, less = true) {
     this.collection.forEach((dot) => {
       if (

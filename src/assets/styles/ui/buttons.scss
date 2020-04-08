@@ -1,0 +1,391 @@
+/* -----------------------------------------------------
+  Material Design Buttons
+  https://codepen.io/rkchauhan/pen/NNKgJY
+  By: Ravikumar Chauhan
+  Find me on -
+  Twitter: https://twitter.com/rkchauhan01
+  Facebook: https://www.facebook.com/ravi032chauhan
+  GitHub: https://github.com/rkchauhan
+  CodePen: https://codepen.io/rkchauhan
+-------------------------------------------------------- */
+// Buttons Color
+$btn_default: #e0e0e0;
+$btn_lightBlue: #03a9f4;
+$btn_white: #FFF;
+$btn_black: #111;
+$btn_grey: #f5f5f5;
+$btn_orange: #ff9800;
+$btn_amber: #ffc107;
+$btn_green: #4caf50;
+$btn_teal: #009688;
+$btn_cyan: #00bcd4;
+$btn_indigo: #3f51b5;
+$btn_deepPurple: #673ab7;
+$btn_pink: #e91e63;
+$btn_red: #f44336;
+$btn_yellow: #ffeb3b;
+$btn_lime: #cddc39;
+$btn_brown: #795548;
+
+// KEYFRAMES
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+// Column generator
+@mixin colmk($numRows, $margin) {
+  width: ((100% - (($numRows - 1) * $margin)) / $numRows);
+
+  &:nth-child(n) {
+    margin-right: $margin;
+    margin-bottom: $margin;
+  }
+
+  &:nth-child(#{$numRows}n) {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+/* ----------------------------------------------------------------------
+  Material Design Raised Buttons - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-btn {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 1.5rem;
+  color: #424242;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: .8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  outline: none;
+  border: none;
+  user-select: none;
+  border-radius: 2px;
+  transition: all .3s ease-out;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.225);
+
+  &:hover { text-decoration: none; box-shadow: 0 4px 10px 0px rgba(0,0,0,0.225); }
+}
+
+/* ----------------------------------------------------------------------
+  Material Design Fab Buttons - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-btn {
+  &.btn-fab,
+  &.btn-fab-mini {
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    line-height: normal;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 1px rgba(0,0,0,0.3);
+    &:hover { box-shadow: 0 4px 11px 0px rgba(0,0,0,0.375); }
+    i {
+      display: inline-block;
+      float: none;
+      width: inherit;
+      margin: 0;
+      font-size: inherit;
+      text-align: center;
+      line-height: none;
+      vertical-align: middle;
+    }
+  }
+  &.btn-fab {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+  &.btn-fab-mini {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
+
+/* Buttons Color */
+.rkmd-btn {
+  &.btn-lightBlue {
+    color: #FFF;
+    background-color: $btn_lightBlue;
+    &:hover { background-color: lighten($btn_lightBlue, 8%); }
+  }
+
+  &.btn-white {
+    color: #444;
+    background-color: $btn_white;
+    &:hover { background-color: darken($btn_white, 2%); }
+  }
+
+  &.btn-black {
+    color: #bdbdbd;
+    background-color: $btn_black;
+    &:hover { background-color: lighten($btn_black, 8%); }
+  }
+
+  &.btn-grey {
+    color: #757575;
+    background-color: $btn_grey;
+    &:hover { background-color: darken($btn_grey, 4%); }
+  }
+
+  &.btn-orange {
+    color: #FFF;
+    background-color: $btn_orange;
+    &:hover { background-color: lighten($btn_orange, 8%); }
+  }
+
+  &.btn-amber {
+    color: #FFF;
+    background-color: $btn_amber;
+    &:hover { background-color: lighten($btn_amber, 8%); }
+  }
+
+  &.btn-green {
+    color: #FFF;
+    background-color: $btn_green;
+    &:hover { background-color: lighten($btn_green, 8%); }
+  }
+
+  &.btn-teal {
+    color: #FFF;
+    background-color: $btn_teal;
+    &:hover { background-color: lighten($btn_teal, 8%); }
+  }
+
+  &.btn-cyan {
+    color: #FFF;
+    background-color: $btn_cyan;
+    &:hover { background-color: lighten($btn_cyan, 8%); }
+  }
+
+  &.btn-indigo {
+    color: #FFF;
+    background-color: $btn_indigo;
+    &:hover { background-color: lighten($btn_indigo, 8%); }
+  }
+
+  &.btn-deepPurple {
+    color: #FFF;
+    background-color: $btn_deepPurple;
+    &:hover { background-color: lighten($btn_deepPurple, 8%); }
+  }
+
+  &.btn-pink {
+    color: #FFF;
+    background-color: $btn_pink;
+    &:hover { background-color: lighten($btn_pink, 8%); }
+  }
+
+  &.btn-red {
+    color: #FFF;
+    background-color: $btn_red;
+    &:hover { background-color: lighten($btn_red, 8%); }
+  }
+
+  &.btn-yellow {
+    color: #FFF;
+    background-color: $btn_yellow;
+    &:hover { background-color: darken($btn_yellow, 13%); }
+  }
+
+  &.btn-lime {
+    color: #FFF;
+    background-color: $btn_lime;
+    &:hover { background-color: darken($btn_lime, 8%); }
+  }
+
+  &.btn-brown {
+    color: #FFF;
+    background-color: $btn_brown;
+    &:hover { background-color: lighten($btn_brown, 8%); }
+  }
+}
+
+/* Raised Buttons Size (Not work in Fab Buttons) */
+.rkmd-btn {
+  &.btn-lg {
+    height: 48px;
+    line-height: 48px;
+  }
+
+  &.btn-sm {
+    height: 30px;
+    padding: 0 1rem;
+    line-height: 30px;
+    font-size: 12px;
+  }
+
+  &.btn-xs {
+    height: 24px;
+    padding: 0 .4rem;
+    line-height: 24px;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: .2px;
+  }
+}
+
+/* Raised Buttons Types */
+.rkmd-btn {
+  &.disabled, &[disabled] {
+    cursor: default !important;
+    color: #9e9e9e !important;
+    box-shadow: none !important;
+  }
+
+  &.disabled:not(.btn-flat), &[disabled]:not(.btn-flat) {
+    background-color: #cdcdcd !important;
+    &:hover { background-color: #cdcdcd !important; }
+  }
+
+  &.btn-flat {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    &:hover { background-color: #cecece !important; box-shadow: none !important; }
+
+    &.disabled:hover,
+    &[disabled]:hover { background-color: transparent !important; }
+  }
+
+  &.btn-link {
+    color: #3949ab !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+
+    &:hover {
+      text-decoration: underline !important;
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    &.disabled,
+    &[disabled] {
+      color: #9fa8da !important;
+      text-decoration: underline !important;
+      background-color: transparent !important;
+    }
+
+    &.disabled:hover,
+    &[disabled]:hover { background-color: transparent !important; }
+  }
+
+  i {
+    float: left;
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+    font-size: 1.3rem;
+    line-height: inherit;
+
+    &.right {
+      float: right !important;
+      margin: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------
+  Material Design Ripple Effect - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.ripple-effect {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+  z-index: 1;
+
+  .ripple {
+    display: block;
+    position: absolute;
+    border-radius: 100%;
+    background: rgba(255,255,255,0.5);
+    transform: scale(0);
+    pointer-events: none;
+  }
+
+  &.ripple-dark {
+    .ripple {
+      background: rgba(0,0,0,0.1) !important;
+    }
+  }
+
+  &.ripple-red {
+    .ripple {
+      background: rgba(244,67,54,0.725) !important;
+    }
+  }
+
+  &.ripple-orange {
+    .ripple {
+      background: rgba(255,152,0,0.725) !important;
+    }
+  }
+
+  &.ripple-yellow {
+    .ripple {
+      background: rgba(255,235,59,0.725) !important;
+    }
+  }
+
+  &.ripple-green {
+    .ripple {
+      background: rgba(76,175,80,0.725) !important;
+    }
+  }
+
+  &.ripple-purple {
+    .ripple {
+      background: rgba(156,39,176,0.725) !important;
+    }
+  }
+
+  &.ripple-teal {
+    .ripple {
+      background: rgba(0,150,136,0.725) !important;
+    }
+  }
+
+  &.ripple-pink {
+    .ripple {
+      background: rgba(233,30,99,0.725) !important;
+    }
+  }
+
+  .animated {
+    animation: ripple 0.6s linear;
+  }
+
+  @include keyframes('ripple') {
+    100% {
+      opacity: 0;
+      transform: scale(2.5);
+    }
+  }
+}

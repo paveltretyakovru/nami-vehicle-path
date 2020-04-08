@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 import * as L from 'leaflet-hotline';
 import { Layers } from './layers';
 
@@ -6,7 +7,7 @@ import { Dots } from './dots/dots';
 import coordinates from './coordinates.json';
 import {
   HOTLINE_LAYER_NAME, DOTS_LAYER_NAME, PATH_MIN_COLOR, PATH_MAX_COLOR,
-  PATH_MAX_COLOR_INPUT_SELECTOR, PATH_MIN_COLOR_INPUT_SELECTOR, PATH_MEAN_COLOR_INPUT_SELECTOR, PATH_MEAN_COLOR
+  PATH_MAX_COLOR_INPUT_SELECTOR, PATH_MIN_COLOR_INPUT_SELECTOR, PATH_MEAN_COLOR_INPUT_SELECTOR, PATH_MEAN_COLOR, SELECTOR_DISPLAY_DOTS_CHECKBOX
 } from '../constants';
 
 // Initialize some constants
@@ -36,6 +37,10 @@ const tileServer = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 export class Map {
   constructor({ $map }) {
     try {
+      const { app } = window.global;
+      const { rootScope } = app;
+      this.configurationValues = rootScope.configurationValues;
+
       if (!$map) throw new Error('$map is not defined');
       this.$map = $map;
 
@@ -70,6 +75,16 @@ export class Map {
     }
   }
 
+  switchDots(to = true) {
+    if (to) {
+      this.showDots();
+      $(SELECTOR_DISPLAY_DOTS_CHECKBOX).prop('checked', true);
+    } else {
+      this.hideDots();
+      $(SELECTOR_DISPLAY_DOTS_CHECKBOX).prop('checked', false);
+    }
+  }
+
   showDots() {
     try {
       const layer = this.layers.get(DOTS_LAYER_NAME);
@@ -94,28 +109,40 @@ export class Map {
     }
   }
 
+  updateDotsStyles(style) {
+    this.dots.updateDotsStyles(style);
+  }
+
   changeDotsRadius(value) {
     this.dots.changeDotsRadius(value);
+    window.global.app.rootScope.configurationValues.dotRadius = value;
+    window.global.app.updateConfigDisplay();
   }
 
   changeDotsOpacity(value) {
     this.dots.changeDotsOpacity(value);
+    window.global.app.updateConfigDisplay();
   }
 
   changedDotFillOpacity(value) {
     this.dots.changeDotsFillOpacity(value);
+    window.global.app.updateConfigDisplay();
   }
 
   changeDotsBgColor(color) {
     this.dots.changeDotsBgColor(color);
+    window.global.app.updateConfigDisplay();
   }
 
   changeDotsStrokeColor(color) {
     this.dots.changeDotsStrokeColor(color);
+    window.global.app.updateConfigDisplay();
   }
 
-  changeDotsStrokeWeight(color) {
-    this.dots.changeDotsStrokeWeight(color);
+  changeDotsStrokeWeight(weight) {
+    this.dots.changeDotsStrokeWeight(weight);
+    window.global.app.rootScope.configurationValues.strokeWeight = weight;
+    window.global.app.updateConfigDisplay();
   }
   // ================================== END DOTS CONFIG ========================
 
@@ -144,20 +171,27 @@ export class Map {
   }
 
   updateHotlinePalette() {
-    const maxVal = document.getElementById(PATH_MAX_COLOR_INPUT_SELECTOR).value;
-    const minVal = document.getElementById(PATH_MIN_COLOR_INPUT_SELECTOR).value;
-    const meanVal = document.getElementById(PATH_MEAN_COLOR_INPUT_SELECTOR).value;
+    const maxColor = document.getElementById(PATH_MAX_COLOR_INPUT_SELECTOR).value || PATH_MAX_COLOR;
+    const minColor = document.getElementById(PATH_MIN_COLOR_INPUT_SELECTOR).value || PATH_MIN_COLOR;
+    const normalColor = document.getElementById(PATH_MEAN_COLOR_INPUT_SELECTOR).value || PATH_MEAN_COLOR; 
     const hotlineLayer = this.layers.get(HOTLINE_LAYER_NAME);
+
+    this.configurationValues.maxColor = maxColor;
+    this.configurationValues.minColor =  minColor;
+    this.configurationValues.normalColor =  normalColor;
+    
 
     if (hotlineLayer) {
       hotlineLayer.layer.setStyle({
         'palette': {
-            0.0: minVal,
-            0.5: meanVal,
-            1.0: maxVal,
+            0.0: minColor,
+            0.5: normalColor,
+            1.0: maxColor,
 				}
       }).redraw();
     }
+
+    window.global.app.updateConfigDisplay(this.configurationValues);
   }
   
 }
