@@ -99,10 +99,8 @@ export class App {
             calc = 1;
           } else if (calc === 1) {
             calc = 0;
-          } else if (calc > 1 && calc > 50) {
-            calc = Number(`0.${calc}`);
-          } else if (calc > 1 && calc < 50) {
-            calc = Number(`0.0${calc}`);
+          } else {
+            calc /= 100;
           }
 
           this.mapController.changeDotsOpacity(calc);
@@ -161,6 +159,8 @@ export class App {
 
       this.formController.switchSliders(config);
       this.formController.switchColorPickers(config);
+
+      this.filtersControler.switchSliders(config);
     });
   }
 

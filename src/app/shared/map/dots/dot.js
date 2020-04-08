@@ -36,7 +36,12 @@ export class Dot {
     weight, opacity, fillOpacity, fillColor, strokeColor, radius
   }) {
     this.layer.setStyle({
-      weight, opacity, fillOpacity, fillColor, strokeColor
+      weight,
+      fillColor,
+      strokeColor,
+
+      opacity: (opacity > 1) ? opacity / 100 : opacity,
+      fillOpacity: (fillOpacity > 1) ? fillOpacity / 100 : fillOpacity,
     });
 
     this.layer.setRadius(radius);

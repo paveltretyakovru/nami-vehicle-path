@@ -26,14 +26,14 @@ export class Dots {
     }));
   }
 
-  filterDotsByHeading(heading, less = true) {
+  filterDotsByHeading() {
+    const min = window.global.app.rootScope.configurationValues.minHeading;
+    const max = window.global.app.rootScope.configurationValues.maxHeading;
+
     this.collection.forEach((dot) => {
-      if (
-        ((less && dot.heading > heading))
-        || (!less && (dot.heading < heading))
-      ) {
+      if (dot.heading >= min && dot.heading <= max) {
         dot.show();
-      }  else {
+      } else {
         dot.hide();
       }
     });

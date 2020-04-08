@@ -26,6 +26,7 @@ const filtersList = [
     type: 'slider',
     value : null,
     selector: DOTS_MIN_HEADING_FILTER_SLIDER_SELECTOR,
+    modelName: 'minHeading',
 
     constructor() {
       sliderConstructor.call(this);
@@ -34,7 +35,7 @@ const filtersList = [
     onChange(value) {
       console.log('onChange', value);
       this.value = value;
-      window.global.dots.filterDotsByHeading(value);
+      window.global.dots.filterDotsByHeading();
       window.global.app.rootScope.configurationValues.minHeading = value;
       window.global.app.updateConfigDisplay();
     }
@@ -45,6 +46,7 @@ const filtersList = [
     type: 'slider',
     value : null,
     selector: DOTS_MAX_HEADING_FILTER_SLIDER_SELECTOR,
+    modelName: 'maxHeading',
 
     constructor() {
       sliderConstructor.call(this);
@@ -52,7 +54,7 @@ const filtersList = [
 
     onChange(value) {
       this.value = value;
-      window.global.dots.filterDotsByHeading(value, false);
+      window.global.dots.filterDotsByHeading();
       window.global.app.rootScope.configurationValues.maxHeading = value;
       window.global.app.updateConfigDisplay();
     }
@@ -67,11 +69,21 @@ export class FiltersController {
     this._initFilters();
   }
 
+  switchSliders(config) {
+    this.filters.forEach((filter) => {
+      if (filter.type === 'slider' && config[filter.modelName]) {
+        filter.component.changeValue(config[filter.modelName]);
+      }
+    });
+  }
+
   _initFilters() {
     try {
       filtersList.forEach((filter) => {
-        this.filters.push(filter.constructor(filter));
-        this._filterFactory(filter);
+        this.filters.push(filter);
+
+        filter.constructor();
+        filter.component = this._filterFactory(filter);
       });
     } catch (error) {
       console.error('FiltersController#_initFilters()', error);

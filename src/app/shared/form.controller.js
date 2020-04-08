@@ -205,26 +205,34 @@ export class FormController {
   }
 
   _initDotsStrokeColorEventsListeners() {
-    const { configurationValues } = this;
+    const { configurationValues, $dotStrokeColorPicker } = this;
 
-    $(this.$dotStrokeColorPicker).spectrum({
-      type: "color",
-      color:  configurationValues.strokeColor,
-      preferredFormat: 'hex',
-
-      change: color => this.onChangeDotStrokeColor(color.toHexString())
+    this.spectrums.push({
+      name: 'strokeColor',
+      selector: $dotStrokeColorPicker,
+      constructor: $($dotStrokeColorPicker).spectrum({
+        type: "color",
+        color: configurationValues.strokeColor,
+        preferredFormat: 'hex',
+  
+        change: color => this.onChangeDotStrokeColor(color.toHexString())
+      }),
     });
   }
 
   _initDotsColorEventsListeners() {
-    const { configurationValues } = this;
+    const { configurationValues, $dotColorPicker } = this;
 
-    $(this.$dotColorPicker).spectrum({
-      type: "color",
-      color:  configurationValues.fillColor,
-      preferredFormat: 'hex',
-
-      change: color => this.onChangeDotColor(color.toHexString())
+    this.spectrums.push({
+      name: 'fillColor',
+      selector: $dotColorPicker,
+      constructor: $($dotColorPicker).spectrum({
+        type: "color",
+        color: configurationValues.fillColor,
+        preferredFormat: 'hex',
+  
+        change: color => this.onChangeDotColor(color.toHexString())
+      }),
     });
   }
   
